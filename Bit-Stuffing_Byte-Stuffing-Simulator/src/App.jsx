@@ -480,7 +480,7 @@ Worked example: ${activeContent.workedExample}`;
                   <img className="profile-photo" src="/swaminathan_sir.jpg" alt="Dr. Swaminathan A" />
                   <div>
                     <p className="profile-name">Dr. Swaminathan A</p>
-                    <p className="profile-role">Guide</p>
+                    <p className="profile-role">Professor, Department of Computer Science</p>
                   </div>
                 </div>
               </div>
