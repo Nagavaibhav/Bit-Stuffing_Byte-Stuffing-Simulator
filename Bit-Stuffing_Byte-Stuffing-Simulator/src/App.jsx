@@ -85,7 +85,7 @@ const textbookReference = {
 const virtualLabs = [
   {
     label: "Virtual Labs main portal",
-    url: "https://www.vlab.co.in/",
+    url: "https://sites.google.com/view/swe2002/virtual-lab?authuser=0",
   },
   {
     label: "Amrita Virtual Labs: Computer Networks Lab",
