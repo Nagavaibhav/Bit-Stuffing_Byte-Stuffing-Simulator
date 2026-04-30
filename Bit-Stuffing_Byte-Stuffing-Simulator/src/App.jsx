@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const topicContent = {
   byte: {
@@ -171,6 +171,7 @@ function App() {
   const [activeTopic, setActiveTopic] = useState("byte");
   const [showHelp, setShowHelp] = useState(false);
   const [showDeveloper, setShowDeveloper] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [bytePayload, setBytePayload] = useState("ABFEFC");
   const [flagByte, setFlagByte] = useState("F");
@@ -182,6 +183,18 @@ function App() {
     [bytePayload, flagByte, escapeByte]
   );
   const bitSimulation = useMemo(() => buildBitStuffingSimulation(bitStream), [bitStream]);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("stuffing-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldUseDark = savedTheme ? savedTheme === "dark" : prefersDark;
+    setIsDarkMode(shouldUseDark);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = isDarkMode ? "dark" : "light";
+    window.localStorage.setItem("stuffing-theme", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
   const activeContent = topicContent[activeTopic];
 
@@ -204,6 +217,9 @@ Worked example: ${activeContent.workedExample}`;
   return (
     <div className="app-shell">
       <nav className="top-navbar" aria-label="Utility navigation">
+        <button className="nav-button secondary top-nav-button theme-toggle" onClick={() => setIsDarkMode((current) => !current)}>
+          {isDarkMode ? "Light mode" : "Dark mode"}
+        </button>
         <button className="nav-button secondary top-nav-button" onClick={() => setShowHelp(true)}>
           Help
         </button>
